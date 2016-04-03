@@ -1,5 +1,6 @@
-//setup express
+//setup modules and express
 var express = require('express');
+var fortune = require('./lib/fortune.js');
 var app = express();
 
 //listen on port3000
@@ -19,8 +20,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/about', function(req, res) {
-	var randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)];
-	res.render('about', {fortune: randomFortune} );
+	res.render('about', { fortune: fortune.getFortune() });
 });
 
 //custom 404 page
@@ -35,10 +35,6 @@ app.use(function(err,req,res,next) {
 	res.render('500');
 });
 
-var fortunes = ['You will become rich.', 
-				'You will be happy.', 
-				'You will live a long time.', 
-				'The future looks bright.',
-				'Do not fear the future.'];
+
 
 
